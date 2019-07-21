@@ -10,9 +10,10 @@ public class Player : MonoBehaviour
     // optional: assigned value
 
     [SerializeField]
-    private float speed = 3.5f; // default is 0 if unassigned. 'f' is required for floats
+    private float _speed = 3.5f; // default is 0 if unassigned. 'f' is required for floats
 
-    public float horizInput, verticalInput;
+    [SerializeField]
+    private GameObject _laserPrefab;
 
 
 
@@ -27,19 +28,26 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement(); // call custom method
+
+        // if we hit space key, spawn a laser gameObject
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+        }
+
     }
 
     // custom method
     void CalculateMovement()
     {
-        horizInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        float horizInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
         // 1 unit is 1 meter ; new Vector3(1,0,0) * RealTime(deltaTime) * 5
  
 
         Vector3 direction = new Vector3(horizInput, verticalInput, 0);
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * _speed * Time.deltaTime);
 
         // set boundaries
         /*
