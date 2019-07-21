@@ -31,14 +31,32 @@ public class Player : MonoBehaviour
 
         // 1 unit is 1 meter ; new Vector3(1,0,0) * RealTime(deltaTime) * 5
         // use Time.deltaTime to run 1m/sec
-        // transform.Translate(Vector3.right * Time.deltaTime * speed * horizInput);
-        // transform.Translate(Vector3.up * Time.deltaTime * speed * verticalInput);
+
 
         // transform.Translate(new Vector3(horizInput, verticalInput, 0) * speed * Time.deltaTime);
 
         // best practice version:
         Vector3 direction = new Vector3(horizInput, verticalInput, 0);
         transform.Translate(direction * speed * Time.deltaTime);
+
+        // if player position on the y is greater than 6
+        // y position is -6
+
+        if (transform.position.y >= 6)
+        {
+            transform.position = new Vector3(transform.position.x, 6, 0);
+        } else if (transform.position.y <=-6)
+        {
+            transform.position = new Vector3(transform.position.x, -6, 0);
+        }
+
+        if (transform.position.x >= 11)
+        {
+            transform.position = new Vector3(-11, transform.position.y, 0);
+        } else if (transform.position.x <= -11)
+        {
+            transform.position = new Vector3(11, transform.position.y, 0);
+        }
 
     }
 }
