@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right);
+        // 1 unit is 1 meter ; new Vector3(1,0,0) * RealTime(deltaTime) * 5
+        // use Time.deltaTime to run 1m/sec
+        transform.Translate(Vector3.right * Time.deltaTime * 5);
     }
 }
