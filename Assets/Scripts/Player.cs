@@ -52,16 +52,6 @@ public class Player : MonoBehaviour
         transform.Translate(direction * _speed * Time.deltaTime);
 
         // set boundaries
-        /*
-        if (transform.position.y >= 6)
-        {
-            transform.position = new Vector3(transform.position.x, 6, 0);
-        }
-        else if (transform.position.y <= -6)
-        {
-            transform.position = new Vector3(transform.position.x, -6, 0);
-        }
-        */
         // optimized code using Mathf.Clamp eliminating need for if else
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -6, 6), 0);
 

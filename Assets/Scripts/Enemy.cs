@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(Random.Range(-11f, 11f), 7, 0);
+        
     }
 
     // Update is called once per frame
@@ -30,8 +30,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // if other is player -> Destroy us && Damage Player
-        // if other is laser -> destroy us
+
         if (other.tag == "Player")
         {
             Destroy(this.gameObject);
