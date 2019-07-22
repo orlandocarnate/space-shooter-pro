@@ -28,20 +28,24 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         // if other is player -> Destroy us && Damage Player
         // if other is laser -> destroy us
-        switch (other.tag)
+        if (other.tag == "Player")
         {
-            case "Player":
-                Destroy(this.gameObject);
-                break;
+            Destroy(this.gameObject);
+            
+            if (other.transform.GetComponent<Player>() != null)
+            {
+                other.transform.GetComponent<Player>().Damage();
+            }
+        }
 
-            case "Laser":
+        if (other.tag == "Laser")
+        { 
                 Destroy(this.gameObject);
                 Destroy(other.gameObject);
-                break;
         }
 
     }
