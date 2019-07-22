@@ -11,13 +11,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f; // default is 0 if unassigned. 'f' is required for floats
-
     [SerializeField]
     private GameObject _laserPrefab;
-
     [SerializeField]
-    private float _fireRate = 0.15f;
-
+    private float _fireRate = 0.5f;
     private float _canFire = -1f;
 
 
@@ -33,14 +30,11 @@ public class Player : MonoBehaviour
     {
         CalculateMovement(); // call custom method
 
-        // if we hit space key, spawn a laser gameObject
         // add a Cool Down period
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            _canFire = Time.time + _fireRate;
-            Instantiate(_laserPrefab, transform.position + (new Vector3(0, 0.8f, 0)), Quaternion.identity);
+            FireLaser();
         }
-
     }
 
     // custom method
@@ -82,4 +76,12 @@ public class Player : MonoBehaviour
         
 
     }
+
+    void FireLaser()
+    {
+        // if we hit space key, spawn a laser gameObject
+            _canFire = Time.time + _fireRate;
+            Instantiate(_laserPrefab, transform.position + (new Vector3(0, 0.8f, 0)), Quaternion.identity);
+    }
+
 }
